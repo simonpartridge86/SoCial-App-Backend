@@ -1,4 +1,4 @@
-export const events = [
+const events = [
     {
         id: 1,
         title: "event1",
@@ -44,3 +44,5 @@ export const events = [
 
     }
 ]
+
+export default events
