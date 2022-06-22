@@ -12,11 +12,11 @@ export async function getEvents() {
 // post new events
 export async function createEvent(newEvent) {
 
-    await pool.query(`INSERT INTO events(title, description, date, 
-        start_time, end_time, social_link, location, attending_count, status)VALUES 
-        ($1,$2,$3,$4,$5,$6,$7,$8,$9);`,[events.title, events.description, events.date, 
-        events.start_time, events.end_time, events.social_link, events.location, 
-        events.attending_count, events.status]);
+    await pool.query(`INSERT INTO events(type, description, date, 
+        start_time, end_time, social_link, location, attendance, status)VALUES 
+        ($1,$2,$3,$4,$5,$6,$7,$8,$9);`,[newEvent.type, newEvent.description, newEvent.date, 
+        newEvent.start_time, newEvent.end_time, newEvent.social_link, newEvent.location, 
+        newEvent.attendance, newEvent.status]);
 
         const res = await pool.query (`SELECT * FROM events`)
         console.log(res.rows);
