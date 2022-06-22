@@ -1,4 +1,4 @@
-import events from "../libs/events.js";
+// import events from "../libs/events.js";
 import { pool, query } from "../database/index.js"
 // list all events
 export async function getEvents() {

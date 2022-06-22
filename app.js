@@ -1,5 +1,6 @@
 import express from "express";
 import router from "./routes/events.js";
+import pg from 'pg'
 
 const app = express();
 const PORT = 3001;
