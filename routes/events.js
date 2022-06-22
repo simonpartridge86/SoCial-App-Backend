@@ -7,14 +7,14 @@ import {
     createEvent
 } from "../models/events.js"
 
-router.get("/", function (req,res) {
-    const result = getEvents();
+router.get("/", async function (req,res) {
+    const result = await getEvents();
     res.json({success:true, payload:result});
 })
 
-router.post("/",function (req,res) {
+router.post("/", async function (req,res) {
     const newEvent = req.body;
-    const result = createEvent(newEvent);
+    const result = await createEvent(newEvent);
     res.json({success:true, payload:result})
 })
 
