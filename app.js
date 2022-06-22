@@ -1,6 +1,7 @@
 import express from "express";
 import router from "./routes/events.js";
 import pg from 'pg'
+import cors from 'cors'
 
 const app = express();
 const PORT = 3001;
@@ -10,9 +11,16 @@ app.use(function (req,res,next) {
   next()
 })
 
+app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
-app.use("/events",router)
+app.use("/events",router);
+
+//serves front end
+app.get("/", (req, res) => {
+  res.render("App");
+})
+
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
