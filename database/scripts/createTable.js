@@ -1,11 +1,14 @@
 import {query} from "../index.js";
 
-const sqlString = `CREATE TABLE IF NOT EXISTS books (book_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
-    author_id INT,title TEXT)`;
 
-async function createBooksTable() {
+const sqlString = `CREATE TABLE IF NOT EXISTS events (events_id INT
+     PRIMARY KEY GENERATED ALWAYS AS IDENTITY, title TEXT,
+     description TEXT, date TEXT, start_time INT, end_time INT, 
+     social_link TEXT, location TEXT, attending_count TEXT, status BOOLEAN)`;
+
+async function createTable() {
     const res = await query(sqlString);
-    console.log("books table created");  
+    console.log("table created");  
 };
 
-createBooksTable();
+createTable();
