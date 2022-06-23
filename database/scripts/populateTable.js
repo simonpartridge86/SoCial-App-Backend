@@ -9,7 +9,7 @@ for (let i = 0; i<events.length; i++) {
         events[i].date, events[i].start_time, events[i].end_time, events[i].social_link, events[i].location, 
         events[i].attendance, events[i].status]);
 
-    console.log(`populated with ${events[i].type} hoested by ${events[i].author}`);
+    console.log(`populated with ${events[i].type} hosted by ${events[i].author}`);
 }
 }
 

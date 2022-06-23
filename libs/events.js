@@ -45,6 +45,22 @@ const events = [
         status: true
 
 
+    },
+
+    {
+        
+        type: "Coding Help",
+        author: "Kunal",
+        description: "Need help passing props to components in React",
+        date: "2022-06-22",
+        start_time: "18:00",
+        end_time: "19:30",
+        social_link: "https://us04web.zoom.us/j/8961811674?pwd=OWtYSU5kRDIvS2RHZ0RWanFheFNmUT09",
+        location: "",
+        attendance: 4,
+        status: true
+
+
     }
 ]
 
