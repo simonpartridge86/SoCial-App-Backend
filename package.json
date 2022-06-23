@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node -r dotenv/config --experimental-vm-modules node_modules/jest/bin/jest.js",
     "dev": "nodemon -r dotenv/config app.js",
     "createTable": "node -r dotenv/config ./database/scripts/createTable.js",
     "populateTable": "node -r dotenv/config ./database/scripts/populateTable.js",
@@ -28,7 +28,9 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
+    "jest": "^28.1.1",
     "nodemon": "^2.0.16",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "supertest": "^6.2.3"
   }
 }

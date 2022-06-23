@@ -3,7 +3,7 @@ import router from "./routes/events.js";
 import pg from 'pg'
 import cors from 'cors'
 
-const app = express();
+export const app = express();
 const PORT = 3001;
 
 // build a middleware
