@@ -12,14 +12,37 @@ export async function getEvents() {
 // post new events
 export async function createEvent(newEvent) {
 
-    await pool.query(`INSERT INTO events(type, author, description, date, 
-        start_time, end_time, social_link, location, attendance, status)VALUES 
-        ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);`,[newEvent.type, newEvent.author, newEvent.description, newEvent.date, 
-        newEvent.start_time, newEvent.end_time, newEvent.social_link, newEvent.location, 
-        newEvent.attendance, newEvent.status]);
+await pool.query(`INSERT INTO events(type, author, description, date, 
+    start_time, end_time, social_link, location, attendance, status)VALUES 
+    ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);`,[newEvent.type, newEvent.author, newEvent.description, newEvent.date, 
+    newEvent.start_time, newEvent.end_time, newEvent.social_link, newEvent.location, 
+    newEvent.attendance, newEvent.status]);
 
-        const res = await pool.query (`SELECT * FROM events`)
-        console.log(res.rows);
-        return res.rows;
+    const res = await pool.query (`SELECT * FROM events ORDER BY date ASC, start_time ASC;`)
+    console.log(res.rows);
+    return res.rows;
 }
+
+//PATCH request to change attendance count and respond with up to date events list
+export async function changeAttendance(id, body) {
+    //console.log(body)
+    if (body.change === true) {
+        await pool.query (`UPDATE events
+        SET attendance = attendance + 1
+        WHERE events_id = $1;`,
+      [id]
+      );
+    }
+    if (body.change === false) {
+        await pool.query (`UPDATE events
+        SET attendance = attendance - 1
+        WHERE events_id = $1;`,
+      [id]
+      );
+    }
+    const result = await pool.query("SELECT * FROM events ORDER BY date ASC, start_time ASC;")
+    console.log(result.rows);
+    return result.rows;
+  }
+
 

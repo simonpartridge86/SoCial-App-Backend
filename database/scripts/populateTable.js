@@ -7,7 +7,7 @@ for (let i = 0; i<events.length; i++) {
         start_time, end_time, social_link, location, attendance, status)VALUES 
         ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);`,[events[i].type, events[i].author, events[i].description, 
         events[i].date, events[i].start_time, events[i].end_time, events[i].social_link, events[i].location, 
-        events[i].attending_count, events[i].status]);
+        events[i].attendance, events[i].status]);
 
     console.log(`populated with ${events[i].type} hoested by ${events[i].author}`);
 }

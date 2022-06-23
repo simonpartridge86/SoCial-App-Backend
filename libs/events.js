@@ -1,15 +1,15 @@
 const events = [
     {
         
-       type: "Social",
-       author: "Simon",
-        description: "I just like to meet up.",
+        type: "Social",
+        author: "Simon",
+        description: "Just a meet up and chat after class",
         date: "2022-07-01",
-        start_time: "18:00",
-        end_time: "19:30",
-        social_link: "https://zoom.us/",
+        start_time: "17:30",
+        end_time: "18:30",
+        social_link: "https://us04web.zoom.us/j/8961811674?pwd=OWtYSU5kRDIvS2RHZ0RWanFheFNmUT09",
         location: "",
-        attendance: 50,
+        attendance: 3,
         status: true
 
 
@@ -17,15 +17,15 @@ const events = [
 
     {
         
-       type: "Games Session",
-       author:"Matt",
+        type: "Games Session",
+        author:"Matt",
         description: "Poker game, anyone?",
         date: "2022-06-29",
         start_time: "18:30",
         end_time: "20:30",
-        social_link: "",
-        location: "waterloo",
-        attendance: 60,
+        social_link: "https://us04web.zoom.us/j/8961811674?pwd=OWtYSU5kRDIvS2RHZ0RWanFheFNmUT09",
+        location: "",
+        attendance: 6,
         status: true
 
 
@@ -33,16 +33,16 @@ const events = [
 
     {
         
-       type: "Coding Help",
-       author: "Kunal",
-        description: "Stuck with this error?",
+        type: "Coding Help",
+        author: "Kunal",
+        description: "Need help passing props to components in React",
         date: "2022-06-25",
-        start_time: "19:00",
-        end_time: "21:30",
-        social_link: "https://zoom.us/",
+        start_time: "18:00",
+        end_time: "19:30",
+        social_link: "https://us04web.zoom.us/j/8961811674?pwd=OWtYSU5kRDIvS2RHZ0RWanFheFNmUT09",
         location: "",
-        attendance: 70,
-        status: false
+        attendance: 4,
+        status: true
 
 
     }
