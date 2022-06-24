@@ -1,7 +1,7 @@
 const events = [
     {
         type: "Social",
-        author: "Simon",
+        author: "Wanteng",
         description: "Just want to meet up and chat after class on Monday",
         date: "2022-06-27",
         start_time: "17:15",
