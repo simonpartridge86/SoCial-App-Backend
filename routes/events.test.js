@@ -2,11 +2,11 @@ import request from "supertest";
 import { app } from "../app.js";
 import { pool } from "../database/index.js";
 
-//Write tests for all CRUD routes
+/* PLEASE run reset table script (npm run resetTable) before executing the tests */
+
 describe('Tests for all current CRUD routers (GET, POST, PATCH) on "/events" path', () => {
 
-//GET
-test("Runs required tests on GET request at /events path", async () => {
+test("Runs three tests on GET request at /events path. First test checks http status code to be 200. Second/Third Test checks response body structure", async () => {
     const response = await request(app).get("/events");
 
     expect(response.status).toBe(200);
@@ -26,14 +26,13 @@ test("Runs required tests on GET request at /events path", async () => {
         start_time: expect.any(String),
         end_time: expect.any(String),
         social_link: expect.any(String),
-        location: expect.any(String),
         attendance: expect.any(Number),
-        status: expect.any(Boolean),
     }]);
     expect(response.body.payload).toStrictEqual(expectedPayload);
 })
-//POST
-test("Runs required tests on POST request at /events path", async () => {
+
+
+test("Runs three tests on POST request at /events path. First test checks http status code to be 200. Second/Third Test checks response body structure", async () => {
     const postObject = {
         type: "Course Chat",
         author: "Simon",
@@ -42,9 +41,7 @@ test("Runs required tests on POST request at /events path", async () => {
         start_time: "10:00",
         end_time: "10:30",
         social_link: "",
-        location: "",
         attendance: 0,
-        status: false,
     };
     const response = await request(app).post("/events").send(postObject);
 
@@ -66,27 +63,25 @@ test("Runs required tests on POST request at /events path", async () => {
         start_time: expect.any(String),
         end_time: expect.any(String),
         social_link: expect.any(String),
-        location: expect.any(String),
         attendance: expect.any(Number),
-        status: expect.any(Boolean),
     }]);
     expect(response.body.payload).toStrictEqual(expectedPayload);
-})
-//PATCH 
-test("Runs required tests on PATCH request at /events/:id path", async () => {
-    const response = await request(app).patch("/events/4").send({ change: true });
+});
+
+
+test("Runs three tests on PATCH request at /events/id path. First test checks http status code to be 200. Second/Third Test checks response body data", async () => {
+    const response = await request(app).patch("/events/5").send({ change: true });
 
     expect(response.status).toBe(200);
 
     const expectedResponseBody = {
         success: true,
         payload: expect.any(Array)
-    }
-    //console.log(response.body)
+    };
     expect(response.body).toStrictEqual(expectedResponseBody);
 
     const expectedPayload = expect.arrayContaining([{
-        events_id: 4,
+        events_id: 5,
         type: "Course Chat",
         author: "Simon",
         description: "Test event",
@@ -94,15 +89,13 @@ test("Runs required tests on PATCH request at /events/:id path", async () => {
         start_time: "10:00",
         end_time: "10:30",
         social_link: "",
-        location: "",
         attendance: 1,
-        status: false,
     }]);
     expect(response.body.payload).toStrictEqual(expectedPayload);
-})
+});
 
 afterAll( async () => {
     await pool.end();
-})
+});
 
-})
+});
