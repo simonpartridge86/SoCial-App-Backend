@@ -1,53 +1,49 @@
-// import events from "../libs/events.js";
-import { pool, query } from "../database/index.js"
-// list all events
+import { pool } from "../database/index.js"
+
+// Handles get request that passes all future events to the front end. This request is run by useEffect on loading of the APP.
 export async function getEvents() {
   const currentDate = new Date();
   const currentDateFormatted = currentDate.toDateString();
-  // const sqlString = `SELECT * FROM events WHERE Date >= '$1'::date ORDER BY date ASC, start_time ASC;` 
-  const res = await pool.query (`SELECT * FROM events WHERE Date >= $1::date ORDER BY date ASC, start_time ASC;`, [currentDateFormatted]);
-  let newRes = res.rows;
-  console.log(newRes)
-  return newRes;
-}
+  const res = await pool.query (
+    `SELECT * FROM events 
+    WHERE Date >= $1::date 
+    ORDER BY date ASC, start_time ASC;`, 
+    [currentDateFormatted]
+  );
+  const allFutureEvents = res.rows;
+  console.log(allFutureEvents);
+  return allFutureEvents;
+};
 
-// post new events
+// Handles post request that creates a new event in the database. Responds with all future events to the front end. 
 export async function createEvent(newEvent) {
-  const currentDate = new Date();
-  const currentDateFormatted = currentDate.toDateString();
-await pool.query(`INSERT INTO events (type, author, description, date, 
-    start_time, end_time, social_link, location, attendance, status)VALUES 
-    ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);`,[newEvent.type, newEvent.author, newEvent.description, newEvent.date, 
-    newEvent.start_time, newEvent.end_time, newEvent.social_link, newEvent.location, 
-    newEvent.attendance, newEvent.status]);
+  await pool.query(
+    `INSERT INTO events (type, author, description, date, 
+    start_time, end_time, social_link, attendance)
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8);`,
+    [newEvent.type, newEvent.author, newEvent.description, newEvent.date, 
+    newEvent.start_time, newEvent.end_time, newEvent.social_link, newEvent.attendance]
+  );
+  return getEvents();
+};
 
-    const res = await pool.query (`SELECT * FROM events WHERE Date >= $1::date ORDER BY date ASC, start_time ASC;`, [currentDateFormatted])
-    console.log(res.rows);
-    return res.rows;
-}
-
-//PATCH request to change attendance count and respond with up to date events list
+// Handles patch request that updates the attendance counter (on the selected event by id). Responds with all future events to the front end. 
 export async function changeAttendance(id, body) {
-  const currentDate = new Date();
-  const currentDateFormatted = currentDate.toDateString();
-    //console.log(body)
-    if (body.change === true) {
-        await pool.query (`UPDATE events
-        SET attendance = attendance + 1
-        WHERE events_id = $1;`,
-      [id]
-      );
-    }
-    if (body.change === false) {
-        await pool.query (`UPDATE events
-        SET attendance = attendance - 1
-        WHERE events_id = $1;`,
-      [id]
-      );
-    }
-    const result = await pool.query(`SELECT * FROM events WHERE Date >= $1::date ORDER BY date ASC, start_time ASC;`, [currentDateFormatted])
-    console.log(result.rows);
-    return result.rows;
-  }
+  if (body.change === true) {
+      await pool.query (`UPDATE events
+      SET attendance = attendance + 1
+      WHERE events_id = $1;`,
+    [id]
+    );
+  };
+  if (body.change === false) {
+      await pool.query (`UPDATE events
+      SET attendance = attendance - 1
+      WHERE events_id = $1;`,
+    [id]
+    );
+  };
+  return getEvents();
+};
 
 
