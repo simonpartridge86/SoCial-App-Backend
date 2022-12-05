@@ -1,4 +1,4 @@
-# Backend for "Chews" App
+# Backend for "{SoC}ial" App
 
 This is the back-end repo for "{SoC}ial", a React app made by Matthew Miller, Simon Partridge, Kunal Shukla, and Wanteng Teoh (Team mishMash) in week 9 of our School of Code bootcamp.
 
